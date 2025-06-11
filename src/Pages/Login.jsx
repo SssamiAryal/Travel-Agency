@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "../assets/Login.css";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Logged in successfully!");
-    navigate("/");
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser) {
+      alert("No user found. Please register first.");
+    } else if (storedUser.email === email && storedUser.password === password) {
+      alert("Logged in successfully!");
+      navigate("/");
+    } else {
+      alert("Invalid email or password.");
+    }
   };
 
   return (
@@ -19,8 +30,20 @@ function Login() {
           <h2>Welcome Back, Traveler!</h2>
           <p>Please log in to continue your journey with us.</p>
           <form onSubmit={handleSubmit}>
-            <input type="email" placeholder="Email Address" required />
-            <input type="password" placeholder="Password" required />
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <button type="submit">Login</button>
             <p className="register-link">
               Don’t have an account?{" "}

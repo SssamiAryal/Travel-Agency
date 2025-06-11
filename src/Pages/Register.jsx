@@ -12,7 +12,7 @@ function Register() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    localStorage.setItem("user", JSON.stringify(data));
     alert("Registered successfully!");
     navigate("/login");
   };
