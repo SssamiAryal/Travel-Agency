@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
 .login-page {
   display: flex;
   height: 100vh;
@@ -10,6 +12,34 @@
 .login-left {
   flex: 1;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.quote {
+  max-width: 80%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  background: rgba(255 248 220 / 0.5);
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: fadeInOut 5s infinite;
+  user-select: none;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
 }
 
 .login-right {
@@ -17,20 +47,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #e0f0ff, #ffffff);
+  background: linear-gradient(135deg, #f9f4ef, #fff8e1);
   position: relative;
-  padding: 40px;
+  padding: 60px 80px;
   box-sizing: border-box;
 }
 
 .login-box {
   position: relative;
   background-color: white;
-  padding: 50px 60px;
-  border-radius: 16px;
+  padding: 70px 80px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 450px;
-  box-shadow: 0 20px 40px rgba(13, 110, 253, 0.15);
+  max-width: 520px;
+  box-shadow: 0 20px 40px rgba(139, 94, 60, 0.15);
   text-align: center;
   z-index: 1;
 }
@@ -45,60 +75,65 @@
   background: url("../../assets/Images/Homepage.png") no-repeat center
     center/cover;
   filter: blur(15px);
-  opacity: 0.1;
-  border-radius: 16px;
+  opacity: 0.08;
+  border-radius: 20px;
   z-index: -1;
 }
 
 .login-box h2 {
-  color: #0d6efd;
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+  color: #8b5e3c;
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  font-family: "Merriweather", serif;
 }
 
 .login-box p {
-  font-size: 15px;
-  color: #444;
-  margin-bottom: 30px;
+  font-size: 16px;
+  color: #5c4630;
+  margin-bottom: 40px;
+  font-family: "Georgia", serif;
 }
 
 .login-box input {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
-  color: black;
-  background-color: white;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #b2967d;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #5c4630;
+  background-color: #faf3e0;
+  font-family: "Palatino Linotype", serif;
 }
 
 .login-box button {
   width: 100%;
-  padding: 14px;
-  background-color: #0d6efd;
+  padding: 16px;
+  background-color: #a9746e;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-family: "Georgia", serif;
 }
 
 .login-box button:hover {
-  background-color: #084ec1;
+  background-color: #7a5a51;
 }
 
 .register-link {
-  margin-top: 18px;
-  font-size: 14px;
-  color: #333;
+  margin-top: 22px;
+  font-size: 15px;
+  color: #5c4630;
+  font-family: "Palatino Linotype", serif;
 }
 
 .register-link span {
-  color: #0d6efd;
+  color: #a9746e;
   cursor: pointer;
   text-decoration: underline;
 }
@@ -108,7 +143,7 @@
   content: "";
   position: absolute;
   border-radius: 50%;
-  background: #0d6efd;
+  background: #a9746e;
   opacity: 0.1;
   z-index: 0;
 }
@@ -143,19 +178,24 @@
     background-position: center top !important;
   }
   .login-right {
-    padding: 30px 20px;
+    padding: 40px 30px;
     height: auto;
     min-height: 50vh;
   }
   .login-box {
-    padding: 40px 30px;
+    padding: 60px 50px;
     max-width: 100%;
   }
   .login-box h2 {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
   .login-box p {
-    font-size: 14px;
+    font-size: 15px;
+  }
+  .quote {
+    font-size: 1.6rem;
+    max-width: 90%;
+    padding: 15px 20px;
   }
 }
 
@@ -165,24 +205,25 @@
     height: 40vh;
   }
   .login-box {
-    padding: 30px 20px;
+    padding: 40px 30px;
   }
   .login-box h2 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
   .login-box p {
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 30px;
   }
   .login-box input {
-    padding: 12px;
+    padding: 14px;
     font-size: 14px;
   }
   .login-box button {
-    padding: 12px;
-    font-size: 14px;
+    padding: 14px;
+    font-size: 16px;
   }
   .register-link {
-    font-size: 13px;
+    font-size: 14px;
   }
   .login-right::before {
     width: 80px;
@@ -195,5 +236,10 @@
     height: 50px;
     bottom: 10%;
     right: 10%;
+  }
+  .quote {
+    font-size: 1.2rem;
+    max-width: 95%;
+    padding: 10px 15px;
   }
 }
