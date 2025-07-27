@@ -10,7 +10,8 @@
 .login-left {
   flex: 1;
   position: relative;
-  background: url('/src/Images/Homepage.png') no-repeat center center/cover;
+  background: url("../../assets/Images/Homepage.png") no-repeat center
+    center/cover;
 }
 
 .login-right {
@@ -36,12 +37,14 @@
   z-index: 1;
 }
 
-
 .login-box::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('/src/Images/Homepage.png') no-repeat center/cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("/src/Images/Homepage.png") no-repeat center/cover;
   filter: blur(15px);
   opacity: 0.1;
   border-radius: 16px;
@@ -100,7 +103,6 @@
   cursor: pointer;
   text-decoration: underline;
 }
-
 
 .login-right::before,
 .login-right::after {
