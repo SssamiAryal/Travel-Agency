@@ -141,7 +141,6 @@ body {
   }
 }
 
-/* Responsive for mobiles */
 @media (max-width: 480px) {
   .content h1 {
     font-size: 2rem;

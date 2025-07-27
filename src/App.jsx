@@ -8,7 +8,7 @@ import LandingPage from "./Pages/Public/LandingPage";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/Home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/LandingPage" element={<LandingPage />} />
