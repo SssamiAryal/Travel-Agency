@@ -13,15 +13,17 @@ function Register() {
   } = useForm();
 
   const onSubmit = (data) => {
-    const response = createUser(data);
-    // localStorage.setItem("user", JSON.stringify(data));
-    // alert("Registered successfully!");
+    createUser(data);
     navigate("/login");
   };
 
   return (
     <div className="register-page">
-      <div className="register-left"></div>
+      <div className="register-left">
+        <div className="quote">
+          “Jobs fill your pockets, but adventures fill your soul.”
+        </div>
+      </div>
       <div className="register-right">
         <div className="register-box">
           <h2>Join JourneyTrekker!</h2>
@@ -33,23 +35,19 @@ function Register() {
               {...register("name", { required: "Name is required" })}
             />
             {errors.name && <p>{errors.name.message}</p>}
-
             <input
               type="email"
               placeholder="Email Address"
               {...register("email", { required: "Email is required" })}
             />
             {errors.email && <p>{errors.email.message}</p>}
-
             <input
               type="password"
               placeholder="Create Password"
               {...register("password", { required: "Password is required" })}
             />
             {errors.password && <p>{errors.password.message}</p>}
-
             <button type="submit">Register</button>
-
             <p className="login-link">
               Already have an account?{" "}
               <span onClick={() => navigate("/login")}>Login here</span>
