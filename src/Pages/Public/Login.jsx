@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../Styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import homepageImg from "../../assets/Images/Homepage.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -9,9 +10,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const storedUser = JSON.parse(localStorage.getItem("user"));
-
     if (!storedUser) {
       alert("No user found. Please register first.");
     } else if (storedUser.email === email && storedUser.password === password) {
@@ -24,7 +23,15 @@ function Login() {
 
   return (
     <div className="login-page">
-      <div className="login-left"></div>
+      <div
+        className="login-left"
+        style={{
+          backgroundImage: `url(${homepageImg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+        }}
+      ></div>
       <div className="login-right">
         <div className="login-box">
           <h2>Welcome Back, Traveler!</h2>
