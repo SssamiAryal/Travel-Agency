@@ -1,6 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "../../Styles/Home.css";
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -8,22 +9,7 @@ function Home() {
   return (
     <div className="home">
       <div className="hero-section">
-        <nav className="navbar">
-          <div className="logo">JourneyTrekker</div>
-          <ul className="nav-links">
-            <li>Home</li>
-            <li>Destinations</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
-          <div className="nav-buttons">
-            <button className="book-now-btn">Book Now</button>
-            <button className="login-btn" onClick={() => navigate("/login")}>
-              Login
-            </button>
-          </div>
-        </nav>
-
+        <Navbar />
         <div className="hero-content">
           <h1>Your Adventure Awaits</h1>
           <p>

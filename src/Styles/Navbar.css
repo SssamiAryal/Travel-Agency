@@ -1,0 +1,98 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+  cursor: default;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #00a8ff;
+}
+
+.book-now-btn,
+.login-btn {
+  background-color: white;
+  color: #007bff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-now-btn:hover,
+.login-btn:hover {
+  background-color: #00a8ff;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 30px;
+  }
+  .logo {
+    font-size: 1.8rem;
+  }
+  .nav-links {
+    gap: 15px;
+  }
+  .nav-links li {
+    font-size: 1rem;
+  }
+  .book-now-btn,
+  .login-btn {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .nav-links li {
+    font-size: 0.9rem;
+  }
+  .book-now-btn,
+  .login-btn {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px 0;
+  }
+}

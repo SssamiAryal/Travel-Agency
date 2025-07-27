@@ -121,6 +121,23 @@
   background-color: #a84300;
 }
 
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 1rem;
+  margin-top: 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: inline-block;
+  padding: 8px 0;
+}
+
+.btn-back:hover {
+  color: #eee;
+  text-decoration: underline;
+}
+
 .login-link {
   margin-top: 18px;
   font-size: 0.95rem;
@@ -229,4 +246,12 @@
     bottom: 10%;
     right: 10%;
   }
+}
+
+.error {
+  color: #d35400;
+  font-size: 0.9rem;
+  margin-top: -6px;
+  margin-bottom: 8px;
+  text-align: left;
 }
