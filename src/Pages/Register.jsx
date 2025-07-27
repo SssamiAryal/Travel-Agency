@@ -2,6 +2,7 @@ import React from "react";
 import "../assets/Register.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { createUser } from "../Services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -12,8 +13,9 @@ function Register() {
   } = useForm();
 
   const onSubmit = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
-    alert("Registered successfully!");
+    const response=createUser(data)
+    // localStorage.setItem("user", JSON.stringify(data));
+    // alert("Registered successfully!");
     navigate("/login");
   };
 
