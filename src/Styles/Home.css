@@ -17,7 +17,7 @@ body {
 .home {
   width: 100vw;
   min-height: 100vh;
-  background-image: url("../assets/Images/background.png");
+  background-image: url("../assets/Images/home.png");
   background-size: cover;
   background-position: center;
   position: relative;

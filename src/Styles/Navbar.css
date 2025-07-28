@@ -5,7 +5,7 @@
   right: 0;
   height: 60px;
   padding: 10px 50px;
-  background: rgba(0, 0, 0, 0.85); /* semi-transparent dark */
+  background: white;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
@@ -15,7 +15,7 @@
 .logo {
   font-size: 2.2rem;
   font-weight: bold;
-  color: white;
+  color: black;
   cursor: default;
 }
 
@@ -31,18 +31,18 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 1.2rem;
-  color: white;
+  color: black;
   transition: color 0.3s ease;
 }
 
 .nav-links li:hover {
-  color: #00a8ff;
+  color: #007bff;
 }
 
 .book-now-btn,
 .login-btn {
-  background-color: white;
-  color: #007bff;
+  background-color: #007bff;
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
@@ -54,7 +54,7 @@
 
 .book-now-btn:hover,
 .login-btn:hover {
-  background-color: #00a8ff;
+  background-color: #0056b3;
   color: white;
 }
 
@@ -84,7 +84,7 @@
     flex-direction: column;
     gap: 10px;
     padding: 10px 20px;
-    height: auto; /* allow to grow vertically */
+    height: auto;
   }
   .nav-links {
     flex-direction: column;
