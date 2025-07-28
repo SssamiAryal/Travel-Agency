@@ -1,3 +1,4 @@
+/* Box sizing and base styles */
 *,
 *::before,
 *::after {
@@ -23,66 +24,114 @@ body {
   position: relative;
   color: white;
   overflow-x: hidden;
-  padding-bottom: 100px;
+  padding-bottom: 60px;
+}
+
+.hero-section {
+  width: 100%;
 }
 
 .hero-content {
   text-align: center;
-  margin-top: 10%;
+  margin-top: 18%;
   padding: 0 20px;
 }
 
-.hero-content h1 {
+/* Animate heading: fade-in + slide up */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-heading {
   font-size: 4rem;
   font-weight: bold;
   color: white;
+  animation: fadeSlideUp 1.2s ease forwards;
+  /* Small delay on load for smoothness */
+  animation-delay: 0.2s;
 }
 
 .hero-content p {
   font-size: 1.1rem;
-  margin-top: 80px;
+  margin-top: 40px;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  color: white;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 1.4s; /* after heading */
 }
 
 .discover-line {
-  margin-top: 60px;
+  margin-top: 20px;
   font-size: 1.2rem;
   color: white;
   font-weight: 500;
 }
 
 .hero-buttons {
-  margin: 30px auto 0;
+  margin: 25px auto 0;
   display: flex;
   justify-content: center;
   gap: 20px;
+  opacity: 0;
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 1.8s; /* after paragraph */
+}
+
+/* Buttons with subtle scale hover effect */
+.btn-primary,
+.btn-outline {
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  will-change: transform;
 }
 
 .btn-primary {
   background-color: #00a8ff;
   color: white;
-  padding: 12px 25px;
   border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #007acc;
+  transform: scale(1.05);
 }
 
 .btn-outline {
   background-color: transparent;
   color: white;
-  padding: 12px 25px;
   border: 2px solid white;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
 }
 
+.btn-outline:hover {
+  background-color: white;
+  color: #00a8ff;
+  transform: scale(1.05);
+}
+
+/* Animate buttons on load (optional) */
+.animated-btn {
+  opacity: 0;
+  animation: fadeSlideUp 1s ease forwards;
+  animation-delay: 1.8s;
+}
+
+/* Trip Search Box */
 .trip-search-box {
   position: relative;
-  margin: 30px auto 0;
+  margin: 15px auto 0;
   background-color: white;
   color: black;
   width: 80%;
@@ -136,6 +185,13 @@ body {
   font-weight: bold;
   cursor: pointer;
   font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  will-change: transform;
+}
+
+.search-btn:hover {
+  background-color: #007acc;
+  transform: scale(1.05);
 }
 
 /* Responsive Design */
@@ -147,18 +203,18 @@ body {
   .hero-content p {
     font-size: 1rem;
     max-width: 90%;
-    margin-top: 60px;
+    margin-top: 30px;
   }
 
   .discover-line {
     font-size: 1rem;
-    margin-top: 40px;
+    margin-top: 15px;
   }
 
   .hero-buttons {
     flex-wrap: wrap;
     gap: 15px;
-    margin: 30px auto 0;
+    margin: 25px auto 0;
   }
 
   .btn-primary,
@@ -170,7 +226,7 @@ body {
   .trip-search-box {
     width: 90%;
     padding: 20px 15px;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
   }
 
   .trip-search-box h3 {
@@ -186,85 +242,5 @@ body {
   .search-btn {
     font-size: 0.9rem;
     padding: 8px 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 20px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .nav-links li {
-    font-size: 0.9rem;
-  }
-
-  .book-now-btn,
-  .login-btn {
-    width: 100%;
-    margin-left: 0;
-    padding: 10px 0;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 0.9rem;
-    margin-top: 40px;
-  }
-
-  .discover-line {
-    margin-top: 30px;
-    font-size: 0.9rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px auto 0;
-  }
-
-  .btn-primary,
-  .btn-outline {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1rem;
-  }
-
-  .trip-search-box {
-    width: 95%;
-    padding: 15px 10px;
-    margin: 20px auto 0;
-  }
-
-  .trip-search-box h3 {
-    font-size: 1.3rem;
-  }
-
-  .search-fields {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .search-fields input,
-  .search-fields select {
-    width: 100%;
-    min-width: unset;
-    font-size: 1rem;
-  }
-
-  .search-btn {
-    width: 100%;
-    font-size: 1rem;
-    padding: 12px 0;
   }
 }

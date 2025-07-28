@@ -11,14 +11,16 @@ function Home() {
       <div className="hero-section">
         <Navbar />
         <div className="hero-content">
-          <h1>Your Adventure Awaits</h1>
+          <h1 className="animated-heading">Your Adventure Awaits</h1>
           <p>
             Discover extraordinary destinations and create unforgettable
             memories with JourneyTrekker's expertly crafted travel experiences.
           </p>
           <div className="hero-buttons">
-            <button className="btn-primary">Explore Destinations</button>
-            <button className="btn-outline">Learn More</button>
+            <button className="btn-primary animated-btn">
+              Explore Destinations
+            </button>
+            <button className="btn-outline animated-btn">Learn More</button>
           </div>
         </div>
       </div>
