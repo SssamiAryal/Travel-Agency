@@ -6,45 +6,38 @@ function About() {
   return (
     <>
       <Navbar />
-      <section className="about-section">
-        <div className="container">
-          <h2>About JourneyTrekker</h2>
+      <main className="about-main">
+        <section className="about-content">
+          <h1>About JourneyTrekker</h1>
           <p>
-            At JourneyTrekker, we believe travel is more than just seeing new
-            places — it’s about immersing yourself in different cultures,
-            meeting new people, and creating memories that last a lifetime. Our
-            mission is to provide expertly curated travel experiences tailored
-            to your interests and desires.
+            JourneyTrekker is your trusted travel companion, dedicated to making
+            your adventures unforgettable. With over 25 years of experience, we
+            specialize in crafting personalized trips that immerse you in new
+            cultures, breathtaking landscapes, and authentic experiences.
           </p>
           <p>
-            With over 25 years of experience, we combine passion with
-            professionalism to make every trip seamless, exciting, and
-            unforgettable. Whether you seek adventure, relaxation, or cultural
-            exploration, JourneyTrekker is your trusted travel partner.
+            Whether you're seeking adventure, relaxation, or cultural discovery,
+            our expert team ensures seamless planning tailored to your unique
+            interests and pace.
           </p>
-          <div className="values">
-            <div className="value-item">
-              <h3>Trusted Experts</h3>
+          <div className="features">
+            <div className="feature-item">
+              <h3>Expert Guides</h3>
               <p>
-                Dedicated travel professionals committed to your perfect trip.
+                Passionate professionals guiding every step of your journey.
               </p>
             </div>
-            <div className="value-item">
-              <h3>Personalized Trips</h3>
-              <p>
-                Custom itineraries designed to fit your unique interests and
-                pace.
-              </p>
+            <div className="feature-item">
+              <h3>Custom Itineraries</h3>
+              <p>Trips designed to fit your style and preferences perfectly.</p>
             </div>
-            <div className="value-item">
-              <h3>Global Reach</h3>
-              <p>
-                Explore over 150 countries with our extensive network worldwide.
-              </p>
+            <div className="feature-item">
+              <h3>Global Destinations</h3>
+              <p>Explore 150+ countries with our trusted global network.</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </>
   );
 }

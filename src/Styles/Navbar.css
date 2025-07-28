@@ -1,11 +1,15 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 10px 50px;
+  background: rgba(0, 0, 0, 0.85); /* semi-transparent dark */
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px;
-  background: transparent;
-  position: relative;
-  z-index: 10;
 }
 
 .logo {
@@ -56,7 +60,7 @@
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 15px 30px;
+    padding: 10px 30px;
   }
   .logo {
     font-size: 1.8rem;
@@ -80,6 +84,7 @@
     flex-direction: column;
     gap: 10px;
     padding: 10px 20px;
+    height: auto; /* allow to grow vertically */
   }
   .nav-links {
     flex-direction: column;

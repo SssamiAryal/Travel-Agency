@@ -7,11 +7,13 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">JourneyTrekker</div>
+      <div className="logo" onClick={() => navigate("/")}>
+        JourneyTrekker
+      </div>
       <ul className="nav-links">
-        <li>Home</li>
+        <li onClick={() => navigate("/Home")}>Home</li>
         <li>Destinations</li>
-        <li>About</li>
+        <li onClick={() => navigate("/about")}>About</li>
         <li>Contact</li>
       </ul>
       <div className="nav-buttons">
