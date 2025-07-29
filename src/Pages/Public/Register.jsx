@@ -9,8 +9,11 @@ function Register() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const password = watch("password", "");
 
   const onSubmit = (data) => {
     createUser(data);
@@ -24,8 +27,8 @@ function Register() {
           “Jobs fill your pockets, but adventures fill your soul.”
         </div>
       </div>
-      <div className="register-right">
-        <div className="register-box">
+      <div className="login-right register-right">
+        <div className="login-box register-box">
           <h2>Join JourneyTrekker!</h2>
           <p>Create your account to explore amazing travel deals.</p>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,12 +38,14 @@ function Register() {
               {...register("name", { required: "Name is required" })}
             />
             {errors.name && <p className="error">{errors.name.message}</p>}
+
             <input
               type="email"
               placeholder="Email Address"
               {...register("email", { required: "Email is required" })}
             />
             {errors.email && <p className="error">{errors.email.message}</p>}
+
             <input
               type="password"
               placeholder="Create Password"
@@ -49,7 +54,22 @@ function Register() {
             {errors.password && (
               <p className="error">{errors.password.message}</p>
             )}
+
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+            />
+            {errors.confirmPassword && (
+              <p className="error">{errors.confirmPassword.message}</p>
+            )}
+
             <button type="submit">Register</button>
+
             <button
               type="button"
               className="btn-back"
@@ -57,6 +77,7 @@ function Register() {
             >
               ← Back
             </button>
+
             <p className="login-link">
               Already have an account?{" "}
               <span onClick={() => navigate("/login")}>Login here</span>

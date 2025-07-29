@@ -10,15 +10,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser) {
-      alert("No user found. Please register first.");
-    } else if (storedUser.email === email && storedUser.password === password) {
-      alert("Logged in successfully!");
-      navigate("/");
-    } else {
-      alert("Invalid email or password.");
-    }
+    alert("Login submitted. Implement backend authentication.");
   };
 
   return (
