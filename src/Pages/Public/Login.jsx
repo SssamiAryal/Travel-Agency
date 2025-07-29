@@ -8,9 +8,21 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Login submitted. Implement backend authentication.");
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+      alert("Logged in successfully");
+      navigate("/home");
+    } else {
+      alert(data.message || "Login failed");
+    }
   };
 
   return (

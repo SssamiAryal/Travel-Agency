@@ -2,7 +2,6 @@ import React from "react";
 import "../../Styles/Register.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { createUser } from "../../Services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,9 +14,18 @@ function Register() {
 
   const password = watch("password", "");
 
-  const onSubmit = (data) => {
-    createUser(data);
-    navigate("/login");
+  const onSubmit = async (data) => {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      navigate("/login");
+    } else {
+      const resData = await response.json();
+      alert(resData.message || "Registration failed");
+    }
   };
 
   return (
@@ -35,41 +43,33 @@ function Register() {
             <input
               type="text"
               placeholder="Full Name"
-              {...register("name", { required: "Name is required" })}
+              {...register("name", { required: true })}
             />
-            {errors.name && <p className="error">{errors.name.message}</p>}
-
+            {errors.name && <p className="error">Name is required</p>}
             <input
               type="email"
               placeholder="Email Address"
-              {...register("email", { required: "Email is required" })}
+              {...register("email", { required: true })}
             />
-            {errors.email && <p className="error">{errors.email.message}</p>}
-
+            {errors.email && <p className="error">Email is required</p>}
             <input
               type="password"
               placeholder="Create Password"
-              {...register("password", { required: "Password is required" })}
+              {...register("password", { required: true })}
             />
-            {errors.password && (
-              <p className="error">{errors.password.message}</p>
-            )}
-
+            {errors.password && <p className="error">Password is required</p>}
             <input
               type="password"
               placeholder="Confirm Password"
               {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: (value) =>
-                  value === password || "Passwords do not match",
+                required: true,
+                validate: (value) => value === password,
               })}
             />
             {errors.confirmPassword && (
-              <p className="error">{errors.confirmPassword.message}</p>
+              <p className="error">Passwords do not match</p>
             )}
-
             <button type="submit">Register</button>
-
             <button
               type="button"
               className="btn-back"
@@ -77,7 +77,6 @@ function Register() {
             >
               ← Back
             </button>
-
             <p className="login-link">
               Already have an account?{" "}
               <span onClick={() => navigate("/login")}>Login here</span>
