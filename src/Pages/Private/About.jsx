@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import "../../Styles/About.css";
 
 function About() {
@@ -38,6 +39,7 @@ function About() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }
