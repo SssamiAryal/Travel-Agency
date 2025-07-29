@@ -92,7 +92,6 @@ body {
   color: #00a8ff;
 }
 
-/* Solutions Section */
 .solutions-section {
   background-color: #f9f9f9;
   padding: 80px 20px;
@@ -148,7 +147,6 @@ body {
   color: #444;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 3.2rem;
@@ -208,7 +206,7 @@ body {
 
 .info-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   max-width: 1000px;
   margin: 0 auto;
@@ -231,7 +229,7 @@ body {
 
 .info-card h3 {
   font-size: 1.4rem;
-  color: #007acc;
+  color: black;
   margin-bottom: 12px;
   font-weight: 700;
 }
@@ -243,9 +241,8 @@ body {
   font-weight: 500;
 }
 
-/* Testimonial Section - Blue background removed */
 .testimonial-section {
-  background-color: transparent; /* removed blue background */
+  background-color: transparent;
   padding: 80px 20px 100px;
   color: black;
   text-align: center;
@@ -305,7 +302,6 @@ body {
   color: black;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .info-section {
     padding: 60px 20px 80px;
@@ -337,3 +333,105 @@ body {
     gap: 25px;
   }
 }
+
+/* your existing styles ... */
+
+/* Footer Styles */
+
+.footer {
+  background-color: #002b5b;
+  color: #f0f0f0;
+  padding: 40px 20px 20px;
+  font-family: "Arial", sans-serif;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #0b3c74;
+}
+
+.footer-about h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.footer-about p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d3d3d3;
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-social h4 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: #a8c0ff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #00a8ff;
+}
+
+.footer-contact p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #d3d3d3;
+}
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-social .social-icons a {
+  color: #a8c0ff;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social .social-icons a:hover {
+  color: #00a8ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0 5px;
+  font-size: 0.9rem;
+  color: #a8c0ff;
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* End Footer Styles */

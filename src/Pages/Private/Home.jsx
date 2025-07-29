@@ -1,6 +1,7 @@
 import React from "react";
 import "../../Styles/Home.css";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import {
   FaPlane,
   FaHotel,
@@ -133,6 +134,9 @@ function Home() {
           </div>
         </div>
       </div>
+
+      {/* Add Footer here */}
+      <Footer />
     </div>
   );
 }
