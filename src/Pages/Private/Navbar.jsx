@@ -14,7 +14,7 @@ function Navbar() {
         <li onClick={() => navigate("/Home")}>Home</li>
         <li>Destinations</li>
         <li onClick={() => navigate("/about")}>About</li>
-        <li>Contact</li>
+        <li onClick={() => navigate("/contact")}>Contact</li>
       </ul>
       <div className="nav-buttons">
         <button className="book-now-btn">Book Now</button>

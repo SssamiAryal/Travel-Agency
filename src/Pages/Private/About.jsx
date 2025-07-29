@@ -10,31 +10,33 @@ function About() {
       <main className="about-main">
         <section className="about-content">
           <h1>About JourneyTrekker</h1>
-          <p>
-            JourneyTrekker is your trusted travel companion, dedicated to making
-            your adventures unforgettable. With over 25 years of experience, we
-            specialize in crafting personalized trips that immerse you in new
-            cultures, breathtaking landscapes, and authentic experiences.
+          <p className="tagline">
+            Your gateway to unforgettable adventures, crafted with care and
+            passion.
           </p>
           <p>
-            Whether you're seeking adventure, relaxation, or cultural discovery,
-            our expert team ensures seamless planning tailored to your unique
-            interests and pace.
+            With over 25 years of expertise, JourneyTrekker is your trusted
+            travel companion, offering personalized trips that immerse you in
+            the heart of culture, nature, and discovery. Our mission is to turn
+            every journey into a story worth telling.
+          </p>
+          <p>
+            From thrilling adventures to serene escapes, our team tailors each
+            trip to match your pace, style, and dreams. Let us plan your next
+            unforgettable escape.
           </p>
           <div className="features">
             <div className="feature-item">
-              <h3>Expert Guides</h3>
-              <p>
-                Passionate professionals guiding every step of your journey.
-              </p>
+              <h3>🌍 Global Destinations</h3>
+              <p>150+ countries to explore with our trusted global network.</p>
             </div>
             <div className="feature-item">
-              <h3>Custom Itineraries</h3>
-              <p>Trips designed to fit your style and preferences perfectly.</p>
+              <h3>🎯 Custom Itineraries</h3>
+              <p>Designed to suit your travel preferences perfectly.</p>
             </div>
             <div className="feature-item">
-              <h3>Global Destinations</h3>
-              <p>Explore 150+ countries with our trusted global network.</p>
+              <h3>🧭 Expert Guides</h3>
+              <p>Friendly, knowledgeable guides every step of your journey.</p>
             </div>
           </div>
         </section>
