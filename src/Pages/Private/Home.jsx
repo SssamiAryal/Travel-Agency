@@ -68,6 +68,71 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <div className="info-section">
+        <h2>Why Choose JourneyTrekker?</h2>
+        <p className="info-subtext">
+          We are dedicated to delivering personalized and memorable travel
+          experiences with exceptional customer service and expert knowledge.
+        </p>
+        <div className="info-cards">
+          <div className="info-card">
+            <h3>Experienced Travel Experts</h3>
+            <p>
+              Our team has years of experience crafting perfect itineraries
+              tailored to your interests and budget.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Customer Satisfaction</h3>
+            <p>
+              We prioritize your happiness with 24/7 support and flexible travel
+              options.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Best Price Guarantee</h3>
+            <p>
+              Enjoy competitive pricing through our partnerships with airlines,
+              hotels, and service providers.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Safe and Secure Travel</h3>
+            <p>
+              We ensure all bookings comply with the highest safety and health
+              standards.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="testimonial-section">
+        <h2>What Our Travelers Say</h2>
+        <div className="testimonials">
+          <div className="testimonial-card">
+            <p>
+              "JourneyTrekker planned my honeymoon perfectly! Every detail was
+              seamless and the local guides were amazing."
+            </p>
+            <span>- Priya Sharma</span>
+          </div>
+          <div className="testimonial-card">
+            <p>
+              "Great customer service and fantastic deals. I’ll definitely book
+              my next trip here."
+            </p>
+            <span>- Rajesh Koirala</span>
+          </div>
+          <div className="testimonial-card">
+            <p>
+              "From flights to hotels, everything was organized and affordable.
+              Highly recommend JourneyTrekker!"
+            </p>
+            <span>- Anjali Thapa</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
