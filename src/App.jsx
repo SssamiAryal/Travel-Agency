@@ -6,6 +6,7 @@ import Register from "./Pages/Public/Register";
 import LandingPage from "./Pages/Public/LandingPage";
 import About from "./Pages/Private/About";
 import Contact from "./Pages/Private/Contact";
+import Destination from "./Pages/Private/Destination";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/destination" element={<Destination />} />
     </Routes>
   );
 }

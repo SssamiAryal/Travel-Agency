@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../Styles/Home.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -12,6 +13,8 @@ import {
 } from "react-icons/fa";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <div className="home">
       <Navbar />
@@ -24,7 +27,12 @@ function Home() {
             memories with JourneyTrekker's expertly crafted travel experiences.
           </p>
           <div className="hero-buttons">
-            <button className="btn-primary">Explore Destinations</button>
+            <button
+              className="btn-primary"
+              onClick={() => navigate("/destination")}
+            >
+              Explore Destinations
+            </button>
             <button className="btn-outline">Learn More</button>
           </div>
         </div>
@@ -135,7 +143,6 @@ function Home() {
         </div>
       </div>
 
-      {/* Add Footer here */}
       <Footer />
     </div>
   );
