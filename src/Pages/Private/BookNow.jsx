@@ -9,6 +9,8 @@ import {
   FaUsers,
   FaStickyNote,
 } from "react-icons/fa";
+import { createBooking } from "../../Services/api";
+import BookingDone from "./BookingDone";
 import "../../Styles/BookNow.css";
 
 const destinationsData = {
@@ -71,6 +73,7 @@ function BookNow() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!destination) {
@@ -83,9 +86,23 @@ function BookNow() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      await createBooking({
+        ...formData,
+        travelers: Number(formData.travelers),
+        destination: destination.name,
+      });
+      setSubmitted(true);
+    } catch (error) {
+      alert(
+        "Booking failed: " + (error.response?.data?.message || error.message)
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!destination) return null;
@@ -116,6 +133,7 @@ function BookNow() {
                 onChange={handleChange}
                 required
                 placeholder="Full Name"
+                disabled={loading}
               />
             </div>
           </label>
@@ -130,6 +148,7 @@ function BookNow() {
                 onChange={handleChange}
                 required
                 placeholder="Email Address"
+                disabled={loading}
               />
             </div>
           </label>
@@ -144,6 +163,7 @@ function BookNow() {
                 onChange={handleChange}
                 required
                 placeholder="Phone Number"
+                disabled={loading}
               />
             </div>
           </label>
@@ -157,6 +177,7 @@ function BookNow() {
                 value={formData.travelDate}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
           </label>
@@ -168,6 +189,7 @@ function BookNow() {
                 name="travelers"
                 value={formData.travelers}
                 onChange={handleChange}
+                disabled={loading}
               >
                 {[...Array(10)].map((_, i) => (
                   <option key={i + 1} value={i + 1}>
@@ -186,25 +208,22 @@ function BookNow() {
                 value={formData.requests}
                 onChange={handleChange}
                 placeholder="Special Requests (optional)"
+                disabled={loading}
               />
             </div>
           </label>
 
-          <button type="submit" className="btn-submit">
-            Confirm Booking
+          <button type="submit" className="btn-submit" disabled={loading}>
+            {loading ? "Booking..." : "Confirm Booking"}
           </button>
         </form>
       ) : (
-        <div className="confirmation-message">
-          <h2>Thank you, {formData.fullName}!</h2>
-          <p>
-            Your booking for <strong>{destination.name}</strong> on{" "}
-            <strong>{formData.travelDate}</strong> has been received.
-          </p>
-          <button onClick={() => navigate("/home")} className="btn-back-home">
-            Back to Home
-          </button>
-        </div>
+        <BookingDone
+          fullName={formData.fullName}
+          destination={destination.name}
+          travelDate={formData.travelDate}
+          onClose={() => navigate("/home")}
+        />
       )}
     </div>
   );
