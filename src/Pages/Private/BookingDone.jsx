@@ -20,9 +20,9 @@ function BookingDone({ onClose, fullName, destination, travelDate }) {
               cx="12"
               cy="12"
               r="10"
-              stroke="#4CAF50"
+              stroke="#2196F3"
               strokeWidth="2.5"
-              fill="#4CAF50"
+              fill="#2196F3"
             />
             <path d="M16 8l-5.5 7L8 12" stroke="#ffffff" />
           </svg>
