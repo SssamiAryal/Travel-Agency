@@ -11,6 +11,7 @@ function Navbar() {
   const toggleLogout = () => setShowLogout(!showLogout);
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
     setShowLogout(false);
     navigate("/login");
   };
@@ -33,7 +34,7 @@ function Navbar() {
 
       <div className="nav-right">
         <ul className="nav-links">
-          <li onClick={() => navigate("/Home")}>Home</li>
+          <li onClick={() => navigate("/home")}>Home</li>
           <li onClick={() => navigate("/destination")}>Destinations</li>
           <li onClick={() => navigate("/about")}>About</li>
           <li onClick={() => navigate("/contact")}>Contact</li>

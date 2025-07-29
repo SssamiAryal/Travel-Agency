@@ -2,6 +2,7 @@ import React from "react";
 import "../../Styles/Register.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { registerUser } from "../../Services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,16 +16,11 @@ function Register() {
   const password = watch("password", "");
 
   const onSubmit = async (data) => {
-    const response = await fetch("http://localhost:5000/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
+    try {
+      await registerUser(data);
       navigate("/login");
-    } else {
-      const resData = await response.json();
-      alert(resData.message || "Registration failed");
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 

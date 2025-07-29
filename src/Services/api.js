@@ -1,9 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:4000/api/users";
+const API_BASE = "http://localhost:5000/api/auth";
 
-export const getUsers=()=>axios.get(API);
-export const getUserById=(id)=>axios.get(`${API}/${id}`);
-export const createUser=(data)=>axios.post(API,data);
-export const updateUser=(id,data)=>axios.put(`${API}/${id}`,data);
-export const deleteUser=(id)=>axios.delete(`${API}/${id}`);
+export const registerUser = (data) => axios.post(`${API_BASE}/register`, data);
+export const loginUser = (data) => axios.post(`${API_BASE}/login`, data);

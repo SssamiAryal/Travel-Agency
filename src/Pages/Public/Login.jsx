@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../Styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../Services/api";
 import homepageImg from "../../assets/Images/Homepage.png";
 
 function Login() {
@@ -10,18 +11,13 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    if (response.ok) {
-      localStorage.setItem("token", data.token);
+    try {
+      const response = await loginUser({ email, password });
+      localStorage.setItem("token", response.data.token);
       alert("Logged in successfully");
       navigate("/home");
-    } else {
-      alert(data.message || "Login failed");
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
