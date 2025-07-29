@@ -1,3 +1,4 @@
+// BookNow.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../../Styles/BookNow.css";
@@ -10,6 +11,13 @@ const destinationsData = {
     description:
       "The City of Light, known for its art, fashion, and iconic landmarks like the Eiffel Tower and Louvre Museum.",
   },
+  bali: {
+    name: "Bali",
+    photo:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    description:
+      "An Indonesian island paradise known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.",
+  },
   tokyo: {
     name: "Tokyo",
     photo:
@@ -17,12 +25,26 @@ const destinationsData = {
     description:
       "Japan's bustling capital, famous for its modern skyline, traditional temples, and delicious cuisine.",
   },
-  bali: {
-    name: "Bali",
+  newyork: {
+    name: "New York",
     photo:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=80",
     description:
-      "An Indonesian island paradise known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.",
+      "The city that never sleeps, known for its iconic skyline, Broadway shows, and diverse culture.",
+  },
+  sydney: {
+    name: "Sydney",
+    photo:
+      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80",
+    description:
+      "Famous for its Sydney Opera House and beautiful harbor, offering stunning beaches and vibrant city life.",
+  },
+  rome: {
+    name: "Rome",
+    photo:
+      "https://images.unsplash.com/photo-1505245208761-ba872912fac0?auto=format&fit=crop&w=800&q=80",
+    description:
+      "The Eternal City, rich in history, with ancient ruins, art, and delicious Italian cuisine.",
   },
 };
 

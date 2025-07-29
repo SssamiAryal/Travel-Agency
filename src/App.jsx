@@ -7,6 +7,7 @@ import LandingPage from "./Pages/Public/LandingPage";
 import About from "./Pages/Private/About";
 import Contact from "./Pages/Private/Contact";
 import Destination from "./Pages/Private/Destination";
+import BookNow from "./Pages/Private/BookNow";
 import PrivateRoute from "./Pages/Private/PrivateRoutes";
 
 function App() {
@@ -44,6 +45,14 @@ function App() {
         element={
           <PrivateRoute>
             <Destination />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/book/:destinationId"
+        element={
+          <PrivateRoute>
+            <BookNow />
           </PrivateRoute>
         }
       />
