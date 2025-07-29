@@ -6,6 +6,28 @@
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
+  position: relative;
+}
+
+.btn-back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  color: #7c5a3a;
+  font-weight: 700;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 100;
+  transition: color 0.3s ease;
+}
+
+.btn-back:hover {
+  color: #a9746e;
 }
 
 .register-left {
@@ -143,23 +165,6 @@
 .register-box button:hover {
   background-color: #7a5a51;
   box-shadow: 0 6px 20px rgba(122, 90, 81, 0.8);
-}
-
-.btn-back {
-  background: transparent;
-  border: none;
-  color: #a9746e;
-  font-size: 1rem;
-  margin-top: 12px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  display: inline-block;
-  padding: 8px 0;
-}
-
-.btn-back:hover {
-  color: #7a5a51;
-  text-decoration: underline;
 }
 
 .login-link {

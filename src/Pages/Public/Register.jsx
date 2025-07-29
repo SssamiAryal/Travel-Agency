@@ -3,6 +3,7 @@ import "../../Styles/Register.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../Services/api";
+import { FaArrowLeft } from "react-icons/fa";
 
 function Register() {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ function Register() {
 
   return (
     <div className="register-page">
+      <button className="btn-back" onClick={() => navigate(-1)}>
+        <FaArrowLeft /> Back
+      </button>
       <div className="register-left">
         <div className="quote">
           “Jobs fill your pockets, but adventures fill your soul.”
@@ -66,18 +70,12 @@ function Register() {
               <p className="error">Passwords do not match</p>
             )}
             <button type="submit">Register</button>
-            <button
-              type="button"
-              className="btn-back"
-              onClick={() => navigate(-1)}
-            >
-              ← Back
-            </button>
-            <p className="login-link">
-              Already have an account?{" "}
-              <span onClick={() => navigate("/login")}>Login here</span>
-            </p>
           </form>
+
+          <p className="login-link">
+            Already have an account?{" "}
+            <span onClick={() => navigate("/login")}>Login here</span>
+          </p>
         </div>
       </div>
     </div>
