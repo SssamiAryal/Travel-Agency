@@ -7,17 +7,46 @@ import LandingPage from "./Pages/Public/LandingPage";
 import About from "./Pages/Private/About";
 import Contact from "./Pages/Private/Contact";
 import Destination from "./Pages/Private/Destination";
+import PrivateRoute from "./Pages/Private/PrivateRoutes";
 
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route
+        path="/home"
+        element={
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        }
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<LandingPage />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/destination" element={<Destination />} />
+      <Route
+        path="/about"
+        element={
+          <PrivateRoute>
+            <About />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/contact"
+        element={
+          <PrivateRoute>
+            <Contact />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/destination"
+        element={
+          <PrivateRoute>
+            <Destination />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 }
