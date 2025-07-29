@@ -102,3 +102,51 @@
   color: #555;
   margin: 12px 0;
 }
+
+@media (max-width: 900px) {
+  .contact-content {
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 40px;
+  }
+
+  .contact-form-section,
+  .contact-info-section {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header {
+    padding: 50px 15px;
+  }
+
+  .contact-header h1 {
+    font-size: 2rem;
+  }
+
+  .contact-header p {
+    font-size: 1rem;
+  }
+
+  .contact-form-section input,
+  .contact-form-section textarea {
+    font-size: 0.95rem;
+    padding: 12px 14px;
+  }
+
+  .contact-form-section button {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+
+  .contact-info-section h2 {
+    font-size: 1.3rem;
+  }
+
+  .contact-info-section p {
+    font-size: 0.9rem;
+  }
+}
