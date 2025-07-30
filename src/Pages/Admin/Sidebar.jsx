@@ -1,0 +1,55 @@
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../Styles/Sidebar.css";
+import { FaUserCircle } from "react-icons/fa";
+
+function Sidebar() {
+  const navigate = useNavigate();
+  const [showLogout, setShowLogout] = useState(false);
+  const popupRef = useRef();
+
+  const toggleLogout = () => setShowLogout(!showLogout);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setShowLogout(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="sidebar">
+      <div className="sidebar-header">Admin Dashboard</div>
+      <div className="sidebar-menu-container">
+        <ul className="sidebar-menu">
+          <li onClick={() => navigate("/adminhome")}>Home</li>
+          <li onClick={() => navigate("/admin/bookings")}>Booking</li>
+          <li onClick={() => navigate("/admin/destinations")}>Destination</li>
+          <li onClick={() => navigate("/admin/customers")}>Customer</li>
+        </ul>
+      </div>
+      <div className="sidebar-logout-container">
+        <FaUserCircle
+          className="sidebar-user-icon"
+          onClick={toggleLogout}
+          style={{ marginLeft: "1.5rem" }}
+        />
+        {showLogout && (
+          <div className="sidebar-logout-popup" ref={popupRef}>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Sidebar;
