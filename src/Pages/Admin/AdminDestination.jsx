@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../Styles/AdminDestination.css";
 import Sidebar from "./Sidebar";
+import AddDestination from "./AddDestinationss";
 
-const destinations = [
+const initialDestinations = [
   {
     id: 1,
     name: "Paris, France",
@@ -24,13 +25,33 @@ const destinations = [
 ];
 
 function AdminDestination() {
+  const [destinations, setDestinations] = useState(initialDestinations);
+  const [showAddPopup, setShowAddPopup] = useState(false);
+
+  const handleAddClick = () => {
+    setShowAddPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowAddPopup(false);
+  };
+
+  const handleAddDestination = (newDest) => {
+    const id = destinations.length
+      ? destinations[destinations.length - 1].id + 1
+      : 1;
+    setDestinations([...destinations, { id, ...newDest }]);
+  };
+
   return (
     <div className="admin-destination-layout">
       <Sidebar />
       <div className="admin-destination-container">
         <div className="admin-destination-header">
           <h2>Manage Destinations</h2>
-          <button className="add-destination-button">Add Destination</button>
+          <button className="add-destination-button" onClick={handleAddClick}>
+            Add Destination
+          </button>
         </div>
         <table className="destination-table">
           <thead>
@@ -56,6 +77,12 @@ function AdminDestination() {
           </tbody>
         </table>
       </div>
+      {showAddPopup && (
+        <AddDestination
+          onClose={handleClosePopup}
+          onAdd={handleAddDestination}
+        />
+      )}
     </div>
   );
 }
