@@ -1,6 +1,14 @@
+.admin-destination-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
 .admin-destination-container {
-  padding: 40px;
-  background-color: #f4f9ff;
+  flex: 1;
+  margin-left: 220px;
+  padding: 2rem;
+  background-color: #f8f9fa;
   min-height: 100vh;
 }
 
@@ -8,46 +16,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
+  padding-right: 1rem;
 }
 
 .admin-destination-header h2 {
-  font-size: 24px;
-  color: #333;
+  font-size: 1.8rem;
+  color: #072561;
 }
 
 .add-destination-button {
-  background-color: #007bff;
+  background-color: #3366ff;
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 5px;
+  padding: 10px 22px;
+  border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 3px 8px rgba(51, 102, 255, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .add-destination-button:hover {
-  background-color: #0056b3;
+  background-color: #254eda;
+  box-shadow: 0 4px 12px rgba(37, 78, 218, 0.8);
 }
 
 .destination-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .destination-table th,
 .destination-table td {
-  padding: 15px;
+  padding: 12px 16px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-size: 16px;
 }
 
 .destination-table th {
-  background-color: #d9ebff;
-  color: #333;
+  background-color: #072561;
+  color: white;
+}
+
+.destination-table tr:hover {
+  background-color: #f1f1f1;
 }
 
 .edit-btn,
@@ -57,23 +74,24 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .edit-btn {
-  background-color: #28a745;
+  background-color: #4caf50;
   color: white;
 }
 
 .edit-btn:hover {
-  background-color: #218838;
+  background-color: #449d48;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #f44336;
   color: white;
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  background-color: #d7372f;
 }
