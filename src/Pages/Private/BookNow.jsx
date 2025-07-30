@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   FaArrowLeft,
@@ -75,11 +75,72 @@ function BookNow() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const calendarRef = useRef(null);
+
   useEffect(() => {
     if (!destination) {
       navigate("/");
     }
   }, [destination, navigate]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.target) &&
+        event.target.name !== "travelDateDisplay"
+      ) {
+        setCalendarOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const formatDisplayDate = (dateString) => {
+    if (!dateString) return "";
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options);
+  };
+
+  const formatISODate = (date) => {
+    return date.toISOString().split("T")[0];
+  };
+
+  const generateCalendarDays = () => {
+    const days = [];
+    const today = new Date();
+    const currentDate = formData.travelDate
+      ? new Date(formData.travelDate)
+      : new Date();
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const prevMonthDays = firstDay === 0 ? 6 : firstDay - 1;
+
+    for (let i = 0; i < prevMonthDays; i++) {
+      days.push(null);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      days.push(new Date(year, month, d));
+    }
+
+    return days;
+  };
+
+  const handleDateSelect = (date) => {
+    const isoDate = formatISODate(date);
+    setFormData((prev) => ({ ...prev, travelDate: isoDate }));
+    setCalendarOpen(false);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,6 +168,17 @@ function BookNow() {
 
   if (!destination) return null;
 
+  const days = generateCalendarDays();
+
+  const calendarMonth = formData.travelDate
+    ? new Date(formData.travelDate).toLocaleString(undefined, { month: "long" })
+    : new Date().toLocaleString(undefined, { month: "long" });
+  const calendarYear = formData.travelDate
+    ? new Date(formData.travelDate).getFullYear()
+    : new Date().getFullYear();
+
+  const todayISO = formatISODate(new Date());
+
   return (
     <div className="booknow-container">
       <button className="btn-back" onClick={() => navigate(-1)}>
@@ -120,7 +192,7 @@ function BookNow() {
       </div>
 
       {!submitted ? (
-        <form className="booking-form" onSubmit={handleSubmit}>
+        <form className="booking-form" onSubmit={handleSubmit} noValidate>
           <h2>Book Your Trip</h2>
 
           <label>
@@ -134,6 +206,7 @@ function BookNow() {
                 required
                 placeholder="Full Name"
                 disabled={loading}
+                autoComplete="name"
               />
             </div>
           </label>
@@ -149,6 +222,7 @@ function BookNow() {
                 required
                 placeholder="Email Address"
                 disabled={loading}
+                autoComplete="email"
               />
             </div>
           </label>
@@ -164,22 +238,73 @@ function BookNow() {
                 required
                 placeholder="Phone Number"
                 disabled={loading}
+                autoComplete="tel"
               />
             </div>
           </label>
 
-          <label>
-            <div className="input-icon-wrapper">
+          <label className="custom-date-label">
+            <div
+              className="input-icon-wrapper"
+              onClick={() => setCalendarOpen((v) => !v)}
+            >
               <FaCalendarAlt className="input-icon" />
               <input
-                type="date"
-                name="travelDate"
-                value={formData.travelDate}
-                onChange={handleChange}
-                required
+                type="text"
+                name="travelDateDisplay"
+                value={formatDisplayDate(formData.travelDate)}
+                placeholder="Select Travel Date"
+                readOnly
                 disabled={loading}
+                autoComplete="off"
               />
             </div>
+            {calendarOpen && !loading && (
+              <div
+                className="calendar-popup"
+                ref={calendarRef}
+                role="dialog"
+                aria-modal="true"
+              >
+                <div className="calendar-header">
+                  <strong>
+                    {calendarMonth} {calendarYear}
+                  </strong>
+                </div>
+                <div className="calendar-weekdays">
+                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+                    (d) => (
+                      <div key={d} className="calendar-weekday">
+                        {d}
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="calendar-days">
+                  {days.map((day, idx) => {
+                    if (!day)
+                      return <div key={idx} className="calendar-day empty" />;
+
+                    const dayISO = formatISODate(day);
+                    const disabled = dayISO < todayISO;
+                    const selected = dayISO === formData.travelDate;
+
+                    return (
+                      <button
+                        type="button"
+                        key={idx}
+                        className={`calendar-day${selected ? " selected" : ""}`}
+                        onClick={() => !disabled && handleDateSelect(day)}
+                        disabled={disabled}
+                        aria-label={`Select ${day.toDateString()}`}
+                      >
+                        {day.getDate()}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </label>
 
           <label>

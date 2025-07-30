@@ -9,6 +9,7 @@ import Contact from "./Pages/Private/Contact";
 import Destination from "./Pages/Private/Destination";
 import BookNow from "./Pages/Private/BookNow";
 import PrivateRoute from "./Pages/Private/PrivateRoutes";
+import AdminHome from "./Pages/Admin/AdminHome";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           </PrivateRoute>
         }
       />
+      <Route path="/adminhome" element={<AdminHome />} />
     </Routes>
   );
 }

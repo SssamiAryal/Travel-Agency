@@ -12,10 +12,16 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginUser({ email, password });
-      localStorage.setItem("token", response.data.token);
-      alert("Logged in successfully");
-      navigate("/home");
+      if (email === "admin@gmail.com" && password === "admin123") {
+        localStorage.setItem("token", "admin-token");
+        alert("Admin logged in successfully");
+        navigate("/adminhome");
+      } else {
+        const response = await loginUser({ email, password });
+        localStorage.setItem("token", response.data.token);
+        alert("Logged in successfully");
+        navigate("/home");
+      }
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
     }
