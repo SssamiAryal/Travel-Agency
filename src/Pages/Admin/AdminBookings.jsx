@@ -1,29 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "../../Styles/AdminBookings.css";
-
-const bookingsData = [
-  {
-    id: 1,
-    fullName: "John Doe",
-    email: "john@example.com",
-    phone: "1234567890",
-    travelDate: "2025-08-15",
-    requests: "Vegetarian meals",
-    destination: "Pokhara",
-  },
-  {
-    id: 2,
-    fullName: "Jane Smith",
-    email: "jane@example.com",
-    phone: "9876543210",
-    travelDate: "2025-09-01",
-    requests: "Window seat",
-    destination: "Chitwan",
-  },
-];
+import {
+  fetchBookings,
+  updateBooking,
+  deleteBooking,
+} from "../../Services/api";
+import EditBooking from "./EditBooking"; // Create this popup form
 
 function AdminBookings() {
+  const [bookings, setBookings] = useState([]);
+  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+
+  useEffect(() => {
+    loadBookings();
+  }, []);
+
+  const loadBookings = async () => {
+    try {
+      const res = await fetchBookings();
+      setBookings(res.data);
+    } catch (error) {
+      console.error("Failed to fetch bookings", error);
+    }
+  };
+
+  const handleEditClick = (booking) => {
+    setSelectedBooking(booking);
+    setShowEditPopup(true);
+  };
+
+  const handleDeleteClick = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this booking?"))
+      return;
+    try {
+      await deleteBooking(id);
+      setBookings(bookings.filter((b) => b.id !== id));
+    } catch (error) {
+      console.error("Failed to delete booking", error);
+    }
+  };
+
+  const handleUpdateBooking = async (updatedData) => {
+    try {
+      const res = await updateBooking(updatedData.id, updatedData);
+      setBookings(bookings.map((b) => (b.id === res.data.id ? res.data : b)));
+      setShowEditPopup(false);
+      setSelectedBooking(null);
+    } catch (error) {
+      console.error("Failed to update booking", error);
+    }
+  };
+
   return (
     <div className="admin-bookings-container">
       <Sidebar />
@@ -42,23 +71,41 @@ function AdminBookings() {
             </tr>
           </thead>
           <tbody>
-            {bookingsData.map((booking) => (
+            {bookings.map((booking) => (
               <tr key={booking.id}>
                 <td>{booking.fullName}</td>
                 <td>{booking.email}</td>
                 <td>{booking.phone}</td>
-                <td>{booking.travelDate}</td>
+                <td>{booking.travelDate?.slice(0, 10)}</td>
                 <td>{booking.requests}</td>
                 <td>{booking.destination}</td>
                 <td>
-                  <button className="edit-btn">Edit</button>
-                  <button className="delete-btn">Delete</button>
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEditClick(booking)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteClick(booking.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {showEditPopup && selectedBooking && (
+        <EditBooking
+          booking={selectedBooking}
+          onClose={() => setShowEditPopup(false)}
+          onConfirm={handleUpdateBooking}
+        />
+      )}
     </div>
   );
 }
