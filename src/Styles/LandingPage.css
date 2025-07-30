@@ -55,11 +55,16 @@ body {
   line-height: 1.6;
 }
 
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 50px;
   flex-wrap: wrap;
 }
 
@@ -162,6 +167,10 @@ body {
 
   .content p {
     font-size: 1rem;
+  }
+
+  .buttons-wrapper {
+    margin-bottom: 40px;
   }
 
   .buttons {

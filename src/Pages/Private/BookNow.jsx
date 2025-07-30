@@ -1,3 +1,4 @@
+// frontend/src/components/BookNow.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -9,59 +10,14 @@ import {
   FaUsers,
   FaStickyNote,
 } from "react-icons/fa";
-import { createBooking } from "../../Services/api";
+import { createBooking, fetchDestinations } from "../../Services/api";
 import BookingDone from "./BookingDone";
 import "../../Styles/BookNow.css";
-
-const destinationsData = {
-  paris: {
-    name: "Paris",
-    photo:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "The City of Light, known for its art, fashion, and iconic landmarks like the Eiffel Tower and Louvre Museum.",
-  },
-  bali: {
-    name: "Bali",
-    photo:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "An Indonesian island paradise known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs.",
-  },
-  tokyo: {
-    name: "Tokyo",
-    photo:
-      "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "Japan's bustling capital, famous for its modern skyline, traditional temples, and delicious cuisine.",
-  },
-  newyork: {
-    name: "New York",
-    photo:
-      "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "The city that never sleeps, known for its iconic skyline, Broadway shows, and diverse culture.",
-  },
-  sydney: {
-    name: "Sydney",
-    photo:
-      "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "Famous for its Sydney Opera House and beautiful harbor, offering stunning beaches and vibrant city life.",
-  },
-  rome: {
-    name: "Rome",
-    photo:
-      "https://images.unsplash.com/photo-1505245208761-ba872912fac0?auto=format&fit=crop&w=1000&q=80",
-    description:
-      "The Eternal City, rich in history, with ancient ruins, art, and delicious Italian cuisine.",
-  },
-};
 
 function BookNow() {
   const { destinationId } = useParams();
   const navigate = useNavigate();
-  const destination = destinationsData[destinationId];
+  const [destination, setDestination] = useState(null);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -78,7 +34,6 @@ function BookNow() {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const calendarRef = useRef(null);
 
-  // For controlling calendar month/year navigation
   const [calendarYear, setCalendarYear] = useState(
     formData.travelDate
       ? new Date(formData.travelDate).getFullYear()
@@ -91,10 +46,19 @@ function BookNow() {
   );
 
   useEffect(() => {
-    if (!destination) {
-      navigate("/");
-    }
-  }, [destination, navigate]);
+    fetchDestinations()
+      .then((res) => {
+        const found = res.data.find((d) => d.id.toString() === destinationId);
+        if (!found) {
+          navigate("/");
+        } else {
+          setDestination(found);
+        }
+      })
+      .catch(() => {
+        navigate("/");
+      });
+  }, [destinationId, navigate]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -140,7 +104,6 @@ function BookNow() {
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    // Adjust firstDay so Monday=0, Sunday=6 for calendar start on Monday
     const firstDayAdjusted = firstDay === 0 ? 6 : firstDay - 1;
 
     for (let i = 0; i < firstDayAdjusted; i++) {
@@ -220,7 +183,14 @@ function BookNow() {
       </button>
 
       <div className="destination-info">
-        <img src={destination.photo} alt={destination.name} />
+        <img
+          src={`http://localhost:5000${
+            destination.image_url
+              ? destination.image_url
+              : `/${destination.image}`
+          }`}
+          alt={destination.name}
+        />
         <h1>{destination.name}</h1>
         <p>{destination.description}</p>
       </div>

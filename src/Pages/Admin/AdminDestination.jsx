@@ -1,32 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../Styles/AdminDestination.css";
 import Sidebar from "./Sidebar";
 import AddDestination from "./AddDestinationss";
-
-const initialDestinations = [
-  {
-    id: 1,
-    name: "Paris, France",
-    price: 1200,
-    description: "The city of love and lights.",
-  },
-  {
-    id: 2,
-    name: "Bali, Indonesia",
-    price: 900,
-    description: "Tropical paradise with beaches.",
-  },
-  {
-    id: 3,
-    name: "Kyoto, Japan",
-    price: 1100,
-    description: "Historical temples and gardens.",
-  },
-];
+import { fetchDestinations, addDestination } from "../../Services/api";
 
 function AdminDestination() {
-  const [destinations, setDestinations] = useState(initialDestinations);
+  const [destinations, setDestinations] = useState([]);
   const [showAddPopup, setShowAddPopup] = useState(false);
+
+  useEffect(() => {
+    fetchDestinations()
+      .then((res) => setDestinations(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   const handleAddClick = () => {
     setShowAddPopup(true);
@@ -36,11 +22,20 @@ function AdminDestination() {
     setShowAddPopup(false);
   };
 
-  const handleAddDestination = (newDest) => {
-    const id = destinations.length
-      ? destinations[destinations.length - 1].id + 1
-      : 1;
-    setDestinations([...destinations, { id, ...newDest }]);
+  const handleAddDestination = async (newDest) => {
+    const formData = new FormData();
+    formData.append("name", newDest.name);
+    formData.append("price", newDest.price);
+    formData.append("description", newDest.description);
+    formData.append("image", newDest.image);
+
+    try {
+      const response = await addDestination(formData);
+      setDestinations([...destinations, response.data]);
+      setShowAddPopup(false);
+    } catch (error) {
+      console.error("Failed to add destination", error);
+    }
   };
 
   return (
@@ -59,6 +54,7 @@ function AdminDestination() {
               <th>Destination Name</th>
               <th>Price</th>
               <th>Description</th>
+              <th>Image</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -68,6 +64,19 @@ function AdminDestination() {
                 <td>{dest.name}</td>
                 <td>${dest.price}</td>
                 <td>{dest.description}</td>
+                <td>
+                  <img
+                    src={`http://localhost:5000${
+                      dest.image_url ? dest.image_url : `/${dest.image}`
+                    }`}
+                    alt={dest.name}
+                    style={{
+                      width: "100px",
+                      height: "60px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </td>
                 <td>
                   <button className="edit-btn">Edit</button>
                   <button className="delete-btn">Delete</button>

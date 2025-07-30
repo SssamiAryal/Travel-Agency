@@ -14,9 +14,7 @@ function AddDestination({ onClose, onAdd }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !price || !description || !image) return;
-    const newDestination = { name, price: Number(price), description, image };
-    onAdd(newDestination);
-    onClose();
+    onAdd({ name, price: Number(price), description, image });
   };
 
   return (

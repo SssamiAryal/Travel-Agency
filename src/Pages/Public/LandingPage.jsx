@@ -16,10 +16,15 @@ function LandingPage() {
             Explore breathtaking places, meet new cultures, and create memories
             that last a lifetime with the world’s trusted travel experts.
           </p>
-          <div className="buttons animated-text delay-2">
-            <button className="btn-primary" onClick={() => navigate("/login")}>
-              Let's Go →
-            </button>
+          <div className="buttons-wrapper">
+            <div className="buttons animated-text delay-2">
+              <button
+                className="btn-primary"
+                onClick={() => navigate("/login")}
+              >
+                Let's Go →
+              </button>
+            </div>
           </div>
           <div className="stats animated-text delay-3">
             <div>
