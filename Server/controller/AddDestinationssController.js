@@ -13,7 +13,6 @@ exports.createDestination = async (req, res) => {
       image_url: imageFilename,
     });
 
-    // Add /uploads/ prefix before sending response
     const responseData = {
       ...newDestination.toJSON(),
       image_url: imageFilename ? `/uploads/${imageFilename}` : null,
@@ -29,7 +28,6 @@ exports.getAllDestinations = async (req, res) => {
   try {
     const destinations = await AddDestinationss.findAll();
 
-    // Add /uploads/ prefix to all image URLs
     const destinationsWithPaths = destinations.map((dest) => {
       const destJson = dest.toJSON();
       return {
@@ -71,7 +69,15 @@ exports.updateDestination = async (req, res) => {
 
     await AddDestinationss.update(updateData, { where: { id } });
 
-    res.status(200).json({ message: "Updated" });
+    const updatedDestination = await AddDestinationss.findByPk(id);
+    const destJson = updatedDestination.toJSON();
+
+    const responseData = {
+      ...destJson,
+      image_url: destJson.image_url ? `/uploads/${destJson.image_url}` : null,
+    };
+
+    res.status(200).json(responseData);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

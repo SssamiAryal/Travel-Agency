@@ -1,12 +1,20 @@
+// AdminDestination.jsx
 import React, { useEffect, useState } from "react";
 import "../../Styles/AdminDestination.css";
 import Sidebar from "./Sidebar";
 import AddDestination from "./AddDestinationss";
-import { fetchDestinations, addDestination } from "../../Services/api";
+import EditDestination from "./EditDestination";
+import {
+  fetchDestinations,
+  addDestination,
+  deleteDestination,
+} from "../../Services/api";
 
 function AdminDestination() {
   const [destinations, setDestinations] = useState([]);
   const [showAddPopup, setShowAddPopup] = useState(false);
+  const [showEditPopup, setShowEditPopup] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState(null);
 
   useEffect(() => {
     fetchDestinations()
@@ -35,6 +43,52 @@ function AdminDestination() {
       setShowAddPopup(false);
     } catch (error) {
       console.error("Failed to add destination", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this destination?"))
+      return;
+
+    try {
+      await deleteDestination(id);
+      setDestinations(destinations.filter((dest) => dest.id !== id));
+    } catch (error) {
+      console.error("Failed to delete destination", error);
+    }
+  };
+
+  const handleEditClick = (destination) => {
+    setSelectedDestination(destination);
+    setShowEditPopup(true);
+  };
+
+  const handleUpdateDestination = async (updatedData) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", updatedData.name);
+      formData.append("price", updatedData.price);
+      formData.append("description", updatedData.description);
+      if (updatedData.image) {
+        formData.append("image", updatedData.image);
+      }
+
+      const response = await fetch(
+        `http://localhost:5000/api/destinations/${updatedData.id}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
+      const updated = await response.json();
+      const newList = destinations.map((dest) =>
+        dest.id === updated.id ? updated : dest
+      );
+      setDestinations(newList);
+      setShowEditPopup(false);
+      setSelectedDestination(null);
+    } catch (error) {
+      console.error("Failed to update destination", error);
     }
   };
 
@@ -78,18 +132,37 @@ function AdminDestination() {
                   />
                 </td>
                 <td>
-                  <button className="edit-btn">Edit</button>
-                  <button className="delete-btn">Delete</button>
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEditClick(dest)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(dest.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
       {showAddPopup && (
         <AddDestination
           onClose={handleClosePopup}
           onAdd={handleAddDestination}
+        />
+      )}
+
+      {showEditPopup && selectedDestination && (
+        <EditDestination
+          destination={selectedDestination}
+          onClose={() => setShowEditPopup(false)}
+          onConfirm={handleUpdateDestination}
         />
       )}
     </div>
