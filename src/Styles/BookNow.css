@@ -261,13 +261,31 @@
 }
 
 .calendar-header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: 700;
   font-size: 1.2rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid #d0d9ff;
   color: #3178f2;
   user-select: text;
+}
+
+.calendar-nav-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3178f2;
+  cursor: pointer;
+  padding: 0 6px;
+  user-select: none;
+  transition: color 0.25s ease;
+}
+
+.calendar-nav-btn:hover {
+  color: #1a4db7;
 }
 
 .calendar-weekdays {

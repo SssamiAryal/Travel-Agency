@@ -1,18 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
+import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/Sidebar.css";
-import { FaUserCircle } from "react-icons/fa";
 
 function Sidebar() {
-  const navigate = useNavigate();
   const [showLogout, setShowLogout] = useState(false);
   const popupRef = useRef();
+  const navigate = useNavigate();
 
   const toggleLogout = () => setShowLogout(!showLogout);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   useEffect(() => {
@@ -30,10 +30,9 @@ function Sidebar() {
       <div className="sidebar-header">Admin Dashboard</div>
       <div className="sidebar-menu-container">
         <ul className="sidebar-menu">
-          <li onClick={() => navigate("/adminhome")}>Home</li>
-          <li onClick={() => navigate("/admin/bookings")}>Booking</li>
-          <li onClick={() => navigate("/admin/destinations")}>Destination</li>
-          <li onClick={() => navigate("/admin/customers")}>Customer</li>
+          <li onClick={() => navigate("/adminBookings")}>Bookings</li>
+          <li>Destination</li>
+          <li>Customer</li>
         </ul>
       </div>
       <div className="sidebar-logout-container">

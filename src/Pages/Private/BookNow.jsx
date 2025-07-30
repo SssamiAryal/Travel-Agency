@@ -78,6 +78,18 @@ function BookNow() {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const calendarRef = useRef(null);
 
+  // For controlling calendar month/year navigation
+  const [calendarYear, setCalendarYear] = useState(
+    formData.travelDate
+      ? new Date(formData.travelDate).getFullYear()
+      : new Date().getFullYear()
+  );
+  const [calendarMonth, setCalendarMonth] = useState(
+    formData.travelDate
+      ? new Date(formData.travelDate).getMonth()
+      : new Date().getMonth()
+  );
+
   useEffect(() => {
     if (!destination) {
       navigate("/");
@@ -98,6 +110,14 @@ function BookNow() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (formData.travelDate) {
+      const d = new Date(formData.travelDate);
+      setCalendarYear(d.getFullYear());
+      setCalendarMonth(d.getMonth());
+    }
+  }, [formData.travelDate]);
+
   const formatDisplayDate = (dateString) => {
     if (!dateString) return "";
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -112,20 +132,18 @@ function BookNow() {
   const generateCalendarDays = () => {
     const days = [];
     const today = new Date();
-    const currentDate = formData.travelDate
-      ? new Date(formData.travelDate)
-      : new Date();
 
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+    const year = calendarYear;
+    const month = calendarMonth;
 
     const firstDay = new Date(year, month, 1).getDay();
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-    const prevMonthDays = firstDay === 0 ? 6 : firstDay - 1;
+    // Adjust firstDay so Monday=0, Sunday=6 for calendar start on Monday
+    const firstDayAdjusted = firstDay === 0 ? 6 : firstDay - 1;
 
-    for (let i = 0; i < prevMonthDays; i++) {
+    for (let i = 0; i < firstDayAdjusted; i++) {
       days.push(null);
     }
 
@@ -170,14 +188,30 @@ function BookNow() {
 
   const days = generateCalendarDays();
 
-  const calendarMonth = formData.travelDate
-    ? new Date(formData.travelDate).toLocaleString(undefined, { month: "long" })
-    : new Date().toLocaleString(undefined, { month: "long" });
-  const calendarYear = formData.travelDate
-    ? new Date(formData.travelDate).getFullYear()
-    : new Date().getFullYear();
+  const calendarMonthName = new Date(
+    calendarYear,
+    calendarMonth
+  ).toLocaleString(undefined, { month: "long" });
 
   const todayISO = formatISODate(new Date());
+
+  const prevMonth = () => {
+    if (calendarMonth === 0) {
+      setCalendarMonth(11);
+      setCalendarYear((y) => y - 1);
+    } else {
+      setCalendarMonth((m) => m - 1);
+    }
+  };
+
+  const nextMonth = () => {
+    if (calendarMonth === 11) {
+      setCalendarMonth(0);
+      setCalendarYear((y) => y + 1);
+    } else {
+      setCalendarMonth((m) => m + 1);
+    }
+  };
 
   return (
     <div className="booknow-container">
@@ -247,6 +281,12 @@ function BookNow() {
             <div
               className="input-icon-wrapper"
               onClick={() => setCalendarOpen((v) => !v)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ")
+                  setCalendarOpen((v) => !v);
+              }}
             >
               <FaCalendarAlt className="input-icon" />
               <input
@@ -267,9 +307,25 @@ function BookNow() {
                 aria-modal="true"
               >
                 <div className="calendar-header">
+                  <button
+                    type="button"
+                    className="calendar-nav-btn"
+                    onClick={prevMonth}
+                    aria-label="Previous Month"
+                  >
+                    &#8592;
+                  </button>
                   <strong>
-                    {calendarMonth} {calendarYear}
+                    {calendarMonthName} {calendarYear}
                   </strong>
+                  <button
+                    type="button"
+                    className="calendar-nav-btn"
+                    onClick={nextMonth}
+                    aria-label="Next Month"
+                  >
+                    &#8594;
+                  </button>
                 </div>
                 <div className="calendar-weekdays">
                   {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(

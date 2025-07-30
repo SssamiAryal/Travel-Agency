@@ -10,6 +10,7 @@ import Destination from "./Pages/Private/Destination";
 import BookNow from "./Pages/Private/BookNow";
 import PrivateRoute from "./Pages/Private/PrivateRoutes";
 import AdminHome from "./Pages/Admin/AdminHome";
+import AdminBookings from "./Pages/Admin/AdminBookings";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         }
       />
       <Route path="/adminhome" element={<AdminHome />} />
+      <Route path="/adminBookings" element={<AdminBookings />} />
     </Routes>
   );
 }
