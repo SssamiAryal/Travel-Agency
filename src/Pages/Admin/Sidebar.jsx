@@ -30,9 +30,10 @@ function Sidebar() {
       <div className="sidebar-header">Admin Dashboard</div>
       <div className="sidebar-menu-container">
         <ul className="sidebar-menu">
+          <li onClick={() => navigate("/adminhome")}>Home</li>
           <li onClick={() => navigate("/adminBookings")}>Bookings</li>
-          <li>Destination</li>
-          <li>Customer</li>
+          <li onClick={() => navigate("/adminDestination")}>Destination</li>
+          <li onClick={() => navigate("/adminCustomer")}>Customers</li>
         </ul>
       </div>
       <div className="sidebar-logout-container">

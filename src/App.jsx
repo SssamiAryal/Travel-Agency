@@ -11,6 +11,8 @@ import BookNow from "./Pages/Private/BookNow";
 import PrivateRoute from "./Pages/Private/PrivateRoutes";
 import AdminHome from "./Pages/Admin/AdminHome";
 import AdminBookings from "./Pages/Admin/AdminBookings";
+import Customers from "./Pages/Admin/Customers";
+import AdminDestination from "./Pages/Admin/AdminDestination";
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
       />
       <Route path="/adminhome" element={<AdminHome />} />
       <Route path="/adminBookings" element={<AdminBookings />} />
+      <Route path="/adminCustomer" element={<Customers />} />
+      <Route path="/adminDestination" element={<AdminDestination />} />
     </Routes>
   );
 }
