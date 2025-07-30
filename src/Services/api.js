@@ -1,9 +1,11 @@
+// Services/api.js
 import axios from "axios";
 
 const API_BASE_AUTH = "http://localhost:5000/api/auth";
 const API_BASE_BOOKING = "http://localhost:5000/api/bookings";
 const API_BASE_DESTINATION = "http://localhost:5000/api/destinations";
 const API_BASE_ADMIN_BOOKING = "http://localhost:5000/api/admin-bookings";
+const API_BASE_USERS = "http://localhost:5000/api/users";
 
 export const registerUser = (data) =>
   axios.post(`${API_BASE_AUTH}/register`, data);
@@ -22,7 +24,6 @@ export const addDestination = (formData) =>
 export const deleteDestination = (id) =>
   axios.delete(`${API_BASE_DESTINATION}/${id}`);
 
-// Booking APIs for admin
 export const fetchBookings = () => axios.get(`${API_BASE_ADMIN_BOOKING}`);
 
 export const updateBooking = (id, data) =>
@@ -30,3 +31,7 @@ export const updateBooking = (id, data) =>
 
 export const deleteBooking = (id) =>
   axios.delete(`${API_BASE_ADMIN_BOOKING}/${id}`);
+
+export const getAllUsers = () => axios.get(`${API_BASE_USERS}`);
+
+export const deleteUser = (id) => axios.delete(`${API_BASE_USERS}/${id}`);

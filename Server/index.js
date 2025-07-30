@@ -1,11 +1,10 @@
-// server.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 require("dotenv").config();
 
-const sequelize = require("./database/db"); // <--- Add this line
+const sequelize = require("./database/db");
 
 const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");

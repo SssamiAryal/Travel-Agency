@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+// Customer.jsx
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "../../Styles/Customer.css";
+import { getAllUsers, deleteUser } from "../../Services/api";
 
 function Customer() {
-  const [customers, setCustomers] = useState([
-    { id: 1, fullName: "John Doe", email: "john@example.com" },
-    { id: 2, fullName: "Jane Smith", email: "jane@example.com" },
-    { id: 3, fullName: "Alice Johnson", email: "alice@example.com" },
-  ]);
+  const [customers, setCustomers] = useState([]);
 
-  const handleDelete = (id) => {
-    setCustomers(customers.filter((customer) => customer.id !== id));
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
+
+  const fetchCustomers = async () => {
+    try {
+      const res = await getAllUsers();
+      setCustomers(res.data);
+    } catch (err) {}
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteUser(id);
+      setCustomers(customers.filter((customer) => customer.id !== id));
+    } catch (err) {}
   };
 
   return (
