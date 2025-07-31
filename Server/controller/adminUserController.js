@@ -10,7 +10,6 @@ exports.getAllUsers = async (req, res) => {
     res.json(users);
   } catch (error) {
     console.error("Sequelize findAll error:", error);
-    // Fallback to raw query for debugging
     try {
       const [results, metadata] = await sequelize.query(
         'SELECT * FROM "Users";'
