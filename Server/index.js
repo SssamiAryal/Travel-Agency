@@ -10,7 +10,7 @@ const authRoutes = require("./routes/authRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const AddDestinationssRoutes = require("./routes/AddDestinationssRoutes");
 const adminBookingRoutes = require("./routes/adminBookingRoutes");
-
+const adminUserRoutes = require("./routes/adminUserRoutes");
 const app = express();
 
 app.use(cors());
@@ -23,6 +23,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/destinations", AddDestinationssRoutes);
 app.use("/api/admin-bookings", adminBookingRoutes);
+app.use("/api/users", adminUserRoutes);
 
 const PORT = process.env.PORT || 5000;
 

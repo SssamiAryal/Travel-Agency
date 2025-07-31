@@ -1,4 +1,3 @@
-// models/adminUser.js
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database/db");
 
@@ -22,7 +21,9 @@ const AdminUser = sequelize.define(
   },
   {
     tableName: "Users",
+    schema: "public",
     timestamps: false,
+    freezeTableName: true,
   }
 );
 

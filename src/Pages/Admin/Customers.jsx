@@ -1,4 +1,3 @@
-// Customer.jsx
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import "../../Styles/Customer.css";
@@ -41,7 +40,7 @@ function Customer() {
           <tbody>
             {customers.map((customer) => (
               <tr key={customer.id}>
-                <td>{customer.fullName}</td>
+                <td>{customer.name}</td> {/* fixed here */}
                 <td>{customer.email}</td>
                 <td>
                   <button
