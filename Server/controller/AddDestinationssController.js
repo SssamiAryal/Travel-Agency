@@ -1,4 +1,3 @@
-// AddDestinationssController.js
 const AddDestinationss = require("../model/AddDestinationss");
 
 exports.createDestination = async (req, res) => {
